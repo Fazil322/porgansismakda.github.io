@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { SchoolIcon } from './icons/SchoolIcon';
 import { Page } from '../App';
@@ -43,7 +44,7 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => {
       </div>
       <div className="bg-primary-dark">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center text-sm text-slate-500">
-            <p>&copy; <button onClick={() => setCurrentPage(Page.AdminLogin)} className="hover:text-white focus:outline-none focus:text-white transition-colors">{currentYear}</button> SMK LPPMRI 2 KEDUNGREJA. Seluruh hak cipta dilindungi.</p>
+            <p>&copy; {currentYear} SMK LPPMRI 2 KEDUNGREJA. Seluruh hak cipta dilindungi.</p>
         </div>
       </div>
     </footer>

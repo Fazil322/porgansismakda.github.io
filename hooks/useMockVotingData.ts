@@ -14,16 +14,16 @@ const generateTokens = (count: number): VotingToken[] => {
 };
 
 const initialCandidates: Candidate[] = [
-    { id: 1, name: 'Aditya Pratama', vision: 'Mewujudkan OSIS yang aktif, kreatif, dan inovatif bagi seluruh siswa.', mission: '1. Mengadakan event-event edukatif.\n2. Menampung dan merealisasikan aspirasi siswa.\n3. Menjalin kerjasama antar organisasi.', photoUrl: 'https://i.pravatar.cc/150?u=aditya', votes: 120, bio: 'Siswa kelas XI TKJ 1, aktif di organisasi Pramuka dan Paskibra.' },
-    { id: 2, name: 'Citra Kirana', vision: 'Menjadikan sekolah sebagai tempat yang nyaman dan inspiratif untuk belajar.', mission: '1. Program kebersihan lingkungan sekolah.\n2. Mengaktifkan kembali mading sekolah.\n3. Mengadakan lomba-lomba antar kelas.', photoUrl: 'https://i.pravatar.cc/150?u=citra', votes: 155, bio: 'Siswa kelas XI AKL 2, anggota PMR dan tim debat Bahasa Inggris.' },
-    { id: 3, name: 'Bima Sakti', vision: 'Meningkatkan solidaritas dan prestasi siswa di bidang akademik maupun non-akademik.', mission: '1. Membuat kelompok belajar bersama.\n2. Mengadakan turnamen olahraga.\n3. Mengapresiasi siswa berprestasi.', photoUrl: 'https://i.pravatar.cc/150?u=bima', votes: 98, bio: 'Siswa kelas XI TSM, kapten tim futsal sekolah.' },
+    { id: 1, name: 'Aditya Pratama', vision: 'Mewujudkan OSIS yang aktif, kreatif, dan inovatif bagi seluruh siswa.', mission: '1. Mengadakan event-event edukatif.\n2. Menampung dan merealisasikan aspirasi siswa.\n3. Menjalin kerjasama antar organisasi.', photoUrl: 'https://api.dicebear.com/8.x/personas/svg?seed=Aditya%20Pratama', votes: 120, bio: 'Siswa kelas XI TKJ 1, aktif di organisasi Pramuka dan Paskibra.' },
+    { id: 2, name: 'Citra Kirana', vision: 'Menjadikan sekolah sebagai tempat yang nyaman dan inspiratif untuk belajar.', mission: '1. Program kebersihan lingkungan sekolah.\n2. Mengaktifkan kembali mading sekolah.\n3. Mengadakan lomba-lomba antar kelas.', photoUrl: 'https://api.dicebear.com/8.x/personas/svg?seed=Citra%20Kirana', votes: 155, bio: 'Siswa kelas XI AKL 2, anggota PMR dan tim debat Bahasa Inggris.' },
+    { id: 3, name: 'Bima Sakti', vision: 'Meningkatkan solidaritas dan prestasi siswa di bidang akademik maupun non-akademik.', mission: '1. Membuat kelompok belajar bersama.\n2. Mengadakan turnamen olahraga.\n3. Mengapresiasi siswa berprestasi.', photoUrl: 'https://api.dicebear.com/8.x/personas/svg?seed=Bima%20Sakti', votes: 98, bio: 'Siswa kelas XI TSM, kapten tim futsal sekolah.' },
 ];
 
 const initialOrganizations: Organization[] = [
-    { id: 1, name: 'OSIS', description: 'Organisasi Siswa Intra Sekolah, wadah bagi siswa untuk belajar berorganisasi dan menyalurkan aspirasi.', imageUrl: 'https://via.placeholder.com/150/06b6d4/FFFFFF?text=OSIS', members: ['Ahmad', 'Budi', 'Citra', 'Dewi', 'Eka'] },
-    { id: 2, name: 'Pramuka', description: 'Gerakan kepanduan yang mendidik anggotanya dalam hal kemandirian, keterampilan, dan kepemimpinan.', imageUrl: 'https://via.placeholder.com/150/8b5cf6/FFFFFF?text=Pramuka', members: ['Fajar', 'Gita', 'Hadi', 'Indah'] },
-    { id: 3, name: 'PMR', description: 'Palang Merah Remaja, organisasi yang bergerak di bidang kemanusiaan dan kesehatan.', imageUrl: 'https://via.placeholder.com/150/ec4899/FFFFFF?text=PMR', members: ['Joko', 'Kartika', 'Lina', 'Mira', 'Naufal'] },
-    { id: 4, name: 'Paskibra', description: 'Pasukan Pengibar Bendera, melatih kedisiplinan dan cinta tanah air.', imageUrl: 'https://via.placeholder.com/150/f59e0b/FFFFFF?text=Paskibra', members: ['Putra', 'Rina', 'Sari', 'Tono'] },
+    { id: 1, name: 'OSIS', description: 'Organisasi Siswa Intra Sekolah, wadah bagi siswa untuk belajar berorganisasi dan menyalurkan aspirasi.', imageUrl: 'https://placehold.co/150x150/06b6d4/FFFFFF/png?text=OSIS&font=sans', members: ['Ahmad', 'Budi', 'Citra', 'Dewi', 'Eka'] },
+    { id: 2, name: 'Pramuka', description: 'Gerakan kepanduan yang mendidik anggotanya dalam hal kemandirian, keterampilan, dan kepemimpinan.', imageUrl: 'https://placehold.co/150x150/8b5cf6/FFFFFF/png?text=Pramuka&font=sans', members: ['Fajar', 'Gita', 'Hadi', 'Indah'] },
+    { id: 3, name: 'PMR', description: 'Palang Merah Remaja, organisasi yang bergerak di bidang kemanusiaan dan kesehatan.', imageUrl: 'https://placehold.co/150x150/ec4899/FFFFFF/png?text=PMR&font=sans', members: ['Joko', 'Kartika', 'Lina', 'Mira', 'Naufal'] },
+    { id: 4, name: 'Paskibra', description: 'Pasukan Pengibar Bendera, melatih kedisiplinan dan cinta tanah air.', imageUrl: 'https://placehold.co/150x150/f59e0b/FFFFFF/png?text=Paskibra&font=sans', members: ['Putra', 'Rina', 'Sari', 'Tono'] },
 ];
 
 const initialActivities: Activity[] = [
@@ -34,8 +34,8 @@ const initialActivities: Activity[] = [
 ];
 
 const initialNews: NewsItem[] = [
-    { id: 1, title: 'OSIS Gelar Rapat Awal Tahun Bahas Program Kerja', content: 'OSIS SMK LPPMRI 2 Kedungreja mengadakan rapat perdananya di tahun ajaran baru untuk membahas rencana program kerja setahun ke depan. Rapat dihadiri oleh seluruh pengurus OSIS dan perwakilan dari setiap kelas. Berbagai usulan kegiatan inovatif dibahas untuk meningkatkan partisipasi siswa.', imageUrl: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max', organizationTag: 'OSIS' },
-    { id: 2, title: 'Tim PMR Raih Juara 2 Lomba Pertolongan Pertama', content: 'Tim PMR sekolah berhasil mengharumkan nama sekolah dengan meraih Juara 2 dalam Lomba Pertolongan Pertama yang diadakan di tingkat kabupaten. Keberhasilan ini merupakan buah dari latihan rutin dan kerja keras seluruh anggota tim.', imageUrl: 'https://images.unsplash.com/photo-1628863119423-86d14871d882?ixlib=rb-4.0.3&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=800&fit=max', organizationTag: 'PMR' },
+    { id: 1, title: 'OSIS Gelar Rapat Awal Tahun Bahas Program Kerja', content: 'OSIS SMK LPPMRI 2 Kedungreja mengadakan rapat perdananya di tahun ajaran baru untuk membahas rencana program kerja setahun ke depan. Rapat dihadiri oleh seluruh pengurus OSIS dan perwakilan dari setiap kelas. Berbagai usulan kegiatan inovatif dibahas untuk meningkatkan partisipasi siswa.', imageUrl: 'https://picsum.photos/seed/osis-meeting/800/600', organizationTag: 'OSIS' },
+    { id: 2, title: 'Tim PMR Raih Juara 2 Lomba Pertolongan Pertama', content: 'Tim PMR sekolah berhasil mengharumkan nama sekolah dengan meraih Juara 2 dalam Lomba Pertolongan Pertama yang diadakan di tingkat kabupaten. Keberhasilan ini merupakan buah dari latihan rutin dan kerja keras seluruh anggota tim.', imageUrl: 'https://picsum.photos/seed/pmr-award/800/600', organizationTag: 'PMR' },
 ];
 
 const initialAspirations: Aspiration[] = [

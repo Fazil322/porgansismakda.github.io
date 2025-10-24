@@ -1,4 +1,5 @@
-import React from 'react';
+
+import React, { useState, useRef, useEffect } from 'react';
 import { Page } from '../App';
 import { SchoolIcon } from './icons/SchoolIcon';
 import { VotingEvent } from '../types';
@@ -10,11 +11,41 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ setCurrentPage, votingEvent, isAdminAuthenticated }) => {
+  const [logoClickCount, setLogoClickCount] = useState(0);
+  const clickTimeout = useRef<number>();
+
+  useEffect(() => {
+    // Cleanup timer on unmount
+    return () => clearTimeout(clickTimeout.current);
+  }, []);
+
+  const handleLogoClick = () => {
+    // Clear previous timeout if it exists
+    if (clickTimeout.current) {
+      clearTimeout(clickTimeout.current);
+    }
+
+    const newCount = logoClickCount + 1;
+    setLogoClickCount(newCount);
+
+    if (newCount === 5) {
+      // On 5th click, navigate to admin and reset
+      setLogoClickCount(0);
+      setCurrentPage(Page.AdminLogin);
+    } else {
+      // For clicks 1-4, set a timeout. If it's not cleared by another click, navigate to Home.
+      clickTimeout.current = window.setTimeout(() => {
+        setCurrentPage(Page.Home);
+        setLogoClickCount(0); // Reset after action
+      }, 300);
+    }
+  };
+
 
   return (
     <header className="bg-surface/80 backdrop-blur-lg shadow-sm sticky top-0 z-50 border-b border-slate-200/60">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
-        <div className="flex items-center space-x-3 cursor-pointer" onClick={() => setCurrentPage(Page.Home)}>
+        <div className="flex items-center space-x-3 cursor-pointer" onClick={handleLogoClick}>
           <SchoolIcon className="h-10 w-10 text-primary" />
           <div>
             <h1 className="text-lg font-bold text-primary">Portal Organisasi</h1>
