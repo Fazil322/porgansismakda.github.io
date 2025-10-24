@@ -81,30 +81,30 @@ const HomePage: React.FC<HomePageProps> = ({ organizations, activities, newsItem
 
                 <section>
                     <h3 className="text-2xl font-bold text-primary mb-6">Direktori Organisasi</h3>
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
                         {organizations.map(org => (
                             <OrganizationCard key={org.id} organization={org} onViewClick={handleViewOrg} />
                         ))}
                     </div>
                 </section>
 
-                <div className="grid lg:grid-cols-3 gap-8">
-                    <section className="lg:col-span-2">
+                <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+                    <section className="lg:col-span-3">
                         <h3 className="text-2xl font-bold text-primary mb-6">Sorotan Berita</h3>
                          <div className="space-y-4">
                             {newsItems.map(item => (
-                                <div key={item.id} className="flex items-center space-x-4 bg-surface p-4 rounded-xl shadow-sm border border-slate-200 hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer" onClick={() => setSelectedNews(item)}>
-                                    <img src={item.imageUrl} alt={item.title} className="w-32 h-24 object-cover rounded-lg flex-shrink-0" />
-                                    <div>
+                                <div key={item.id} className="flex flex-col sm:flex-row items-start space-y-3 sm:space-y-0 sm:space-x-4 bg-surface p-4 rounded-xl shadow-sm border border-slate-200 hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer" onClick={() => setSelectedNews(item)}>
+                                    <img src={item.imageUrl} alt={item.title} className="w-full sm:w-32 h-40 sm:h-24 object-cover rounded-lg flex-shrink-0" />
+                                    <div className="flex-grow">
                                         <span className="text-xs bg-accent-light text-accent-hover font-semibold px-2 py-1 rounded-full">{item.organizationTag}</span>
                                         <h4 className="font-bold text-primary mt-2 text-lg">{item.title}</h4>
-                                        <p className="text-sm text-secondary-dark line-clamp-2">{item.content}</p>
+                                        <p className="text-sm text-secondary-dark line-clamp-2 mt-1">{item.content}</p>
                                     </div>
                                 </div>
                             ))}
                         </div>
                     </section>
-                    <aside className="lg:col-span-1 space-y-8">
+                    <aside className="lg:col-span-2 space-y-8">
                         <section>
                             <h3 className="text-2xl font-bold text-primary mb-6">Agenda Terdekat</h3>
                             <ActivityCalendar activities={activities} />

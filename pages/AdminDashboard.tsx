@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useMockVotingData } from '../hooks/useMockVotingData';
 import AdminSidebar from '../components/admin/AdminSidebar';
 import CandidateManager from '../components/admin/CandidateManager';
@@ -12,6 +12,7 @@ import OrganizationManager from '../components/admin/OrganizationManager';
 import DashboardHome from '../components/admin/DashboardHome';
 import AspirationManager from '../components/admin/AspirationManager';
 import MembershipManager from '../components/admin/MembershipManager';
+import { MenuIcon } from '../components/icons/MenuIcon';
 
 type AdminDashboardProps = {
     data: ReturnType<typeof useMockVotingData>;
@@ -34,11 +35,39 @@ export enum AdminPage {
     Settings
 }
 
+const MobileHeader: React.FC<{ onMenuClick: () => void }> = ({ onMenuClick }) => (
+    <div className="md:hidden bg-surface/80 backdrop-blur-lg shadow-sm sticky top-0 z-20 p-4 flex items-center justify-between border-b border-slate-200">
+        <h2 className="text-lg font-bold text-primary">Panel Admin</h2>
+        <button onClick={onMenuClick} className="p-2 text-primary">
+            <MenuIcon className="h-6 w-6" />
+        </button>
+    </div>
+);
+
+
 const AdminDashboard: React.FC<AdminDashboardProps> = ({ data, onLogout, onUpdateCode, addToast, onCategorizeAspirations, onUpdateRegistrationStatus }) => {
     const [currentPage, setCurrentPage] = useState<AdminPage>(AdminPage.Dashboard);
     const [isCategorizing, setIsCategorizing] = useState(false);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     
     const { votingEvent, setVotingEvent, votingTokens, setVotingTokens, organizations, setOrganizations, activities, setActivities, newsItems, setNewsItems, aspirations, setAspirations, voteHistory, registrations } = data;
+
+    useEffect(() => {
+        const isMobile = window.innerWidth < 768;
+        if (isSidebarOpen && isMobile) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isSidebarOpen]);
+
+    const handleSetPage = (page: AdminPage) => {
+        setCurrentPage(page);
+        setIsSidebarOpen(false);
+    };
 
     const addCandidate = (candidate: Omit<Candidate, 'id' | 'votes'>) => {
         setVotingEvent(prev => {
@@ -145,10 +174,20 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ data, onLogout, onUpdat
 
     return (
         <div className="flex h-full bg-slate-100">
-            <AdminSidebar currentPage={currentPage} setCurrentPage={setCurrentPage} onLogout={onLogout} />
-            <main className="flex-1 p-8 overflow-y-auto">
-                <div className="bg-surface p-8 rounded-2xl shadow-sm min-h-full">
-                    {renderContent()}
+             {isSidebarOpen && <div onClick={() => setIsSidebarOpen(false)} className="fixed inset-0 bg-black/50 z-30 md:hidden"></div>}
+            <AdminSidebar 
+                currentPage={currentPage} 
+                setCurrentPage={handleSetPage} 
+                onLogout={onLogout}
+                isOpen={isSidebarOpen}
+                setIsOpen={setIsSidebarOpen}
+            />
+            <main className="flex-1 flex flex-col">
+                <MobileHeader onMenuClick={() => setIsSidebarOpen(true)} />
+                <div className="flex-1 p-4 sm:p-8 overflow-y-auto">
+                    <div className="bg-surface p-4 sm:p-8 rounded-2xl shadow-sm min-h-full">
+                        {renderContent()}
+                    </div>
                 </div>
             </main>
         </div>

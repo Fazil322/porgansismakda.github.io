@@ -1,14 +1,17 @@
 
 import React from 'react';
 import { AdminPage } from '../../pages/AdminDashboard';
+import { XIcon } from '../icons/XIcon';
 
 interface AdminSidebarProps {
   currentPage: AdminPage;
   setCurrentPage: (page: AdminPage) => void;
   onLogout: () => void;
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
 }
 
-const AdminSidebar: React.FC<AdminSidebarProps> = ({ currentPage, setCurrentPage, onLogout }) => {
+const AdminSidebar: React.FC<AdminSidebarProps> = ({ currentPage, setCurrentPage, onLogout, isOpen, setIsOpen }) => {
   const navItems = [
     { page: AdminPage.Dashboard, label: 'Dashboard', icon: ChartBarIcon },
     { page: AdminPage.Candidates, label: 'Kandidat', icon: UsersIcon },
@@ -22,10 +25,15 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ currentPage, setCurrentPage
   ];
 
   return (
-    <aside className="w-64 bg-primary-dark text-slate-300 flex flex-col flex-shrink-0">
-      <div className="p-6 text-center border-b border-primary">
-        <h2 className="text-xl font-bold text-white">Panel Admin</h2>
-        <p className="text-xs text-slate-400">Portal Organisasi</p>
+    <aside className={`fixed inset-y-0 left-0 z-40 w-64 bg-primary-dark text-slate-300 flex flex-col transition-transform transform md:relative md:translate-x-0 ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+      <div className="p-6 flex items-center justify-between border-b border-primary">
+        <div className="text-center">
+          <h2 className="text-xl font-bold text-white">Panel Admin</h2>
+          <p className="text-xs text-slate-400">Portal Organisasi</p>
+        </div>
+        <button onClick={() => setIsOpen(false)} className="md:hidden p-1 text-slate-400 hover:text-white">
+          <XIcon className="h-6 w-6" />
+        </button>
       </div>
       <nav className="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
         {navItems.map(item => (
