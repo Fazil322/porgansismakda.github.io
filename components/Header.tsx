@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { Page } from '../App';
 import { SchoolIcon } from './icons/SchoolIcon';
@@ -28,12 +27,12 @@ const Header: React.FC<HeaderProps> = ({ setCurrentPage, votingEvent, isAdminAut
     const newCount = logoClickCount + 1;
     setLogoClickCount(newCount);
 
-    if (newCount === 5) {
-      // On 5th click, navigate to admin and reset
+    if (newCount === 2) {
+      // On 2nd click, navigate to admin and reset
       setLogoClickCount(0);
       setCurrentPage(Page.AdminLogin);
     } else {
-      // For clicks 1-4, set a timeout. If it's not cleared by another click, navigate to Home.
+      // For a single click, set a timeout. If it's not cleared by another click, navigate to Home.
       clickTimeout.current = window.setTimeout(() => {
         setCurrentPage(Page.Home);
         setLogoClickCount(0); // Reset after action
