@@ -1,7 +1,12 @@
 import React from 'react';
 import { SchoolIcon } from './icons/SchoolIcon';
+import { Page } from '../App';
 
-const Footer: React.FC = () => {
+interface FooterProps {
+  setCurrentPage: (page: Page) => void;
+}
+
+const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => {
   const currentYear = new Date().getFullYear();
   return (
     <footer className="bg-primary text-slate-300 mt-20 border-t-4 border-accent">
@@ -22,9 +27,8 @@ const Footer: React.FC = () => {
           <div>
             <h3 className="font-bold text-white tracking-wider uppercase">Tautan Cepat</h3>
             <ul className="mt-4 space-y-2">
-              <li><a href="#" className="hover:text-accent transition-colors">Beranda</a></li>
-              <li><a href="#" className="hover:text-accent transition-colors">E-Voting</a></li>
-              <li><a href="#" className="hover:text-accent transition-colors">Panel Admin</a></li>
+              <li><a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage(Page.Home); }} className="hover:text-accent transition-colors">Beranda</a></li>
+              <li><a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage(Page.Voting); }} className="hover:text-accent transition-colors">E-Voting</a></li>
             </ul>
           </div>
           <div>
@@ -39,7 +43,7 @@ const Footer: React.FC = () => {
       </div>
       <div className="bg-primary-dark">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center text-sm text-slate-500">
-            <p>&copy; {currentYear} SMK LPPMRI 2 KEDUNGREJA. Seluruh hak cipta dilindungi.</p>
+            <p>&copy; <button onClick={() => setCurrentPage(Page.AdminLogin)} className="hover:text-white focus:outline-none focus:text-white transition-colors">{currentYear}</button> SMK LPPMRI 2 KEDUNGREJA. Seluruh hak cipta dilindungi.</p>
         </div>
       </div>
     </footer>

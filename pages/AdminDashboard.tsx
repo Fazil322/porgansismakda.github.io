@@ -144,7 +144,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ data, onLogout, onUpdat
     };
 
     return (
-        <div className="flex h-screen bg-slate-100 -m-8">
+        <div className="flex h-full bg-slate-100">
             <AdminSidebar currentPage={currentPage} setCurrentPage={setCurrentPage} onLogout={onLogout} />
             <main className="flex-1 p-8 overflow-y-auto">
                 <div className="bg-surface p-8 rounded-2xl shadow-sm min-h-full">

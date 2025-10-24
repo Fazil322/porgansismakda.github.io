@@ -10,13 +10,6 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ setCurrentPage, votingEvent, isAdminAuthenticated }) => {
-  const handleAdminClick = () => {
-    if (isAdminAuthenticated) {
-      setCurrentPage(Page.Admin);
-    } else {
-      setCurrentPage(Page.AdminLogin);
-    }
-  };
 
   return (
     <header className="bg-surface/80 backdrop-blur-lg shadow-sm sticky top-0 z-50 border-b border-slate-200/60">
@@ -39,9 +32,6 @@ const Header: React.FC<HeaderProps> = ({ setCurrentPage, votingEvent, isAdminAut
               </span>
             </button>
           )}
-          <button onClick={handleAdminClick} className="bg-primary text-white px-4 py-2 rounded-lg hover:bg-primary-light font-semibold transition-transform transform hover:scale-105 shadow-sm hover:shadow-md">
-            Panel Admin
-          </button>
         </nav>
         <div className="md:hidden flex items-center space-x-2">
             {votingEvent?.isActive && (
@@ -53,9 +43,6 @@ const Header: React.FC<HeaderProps> = ({ setCurrentPage, votingEvent, isAdminAut
                     </span>
               </button>
             )}
-            <button onClick={handleAdminClick} className="bg-primary text-white px-3 py-1.5 rounded-md hover:bg-primary-light text-sm font-semibold">
-                Admin
-            </button>
         </div>
       </div>
     </header>

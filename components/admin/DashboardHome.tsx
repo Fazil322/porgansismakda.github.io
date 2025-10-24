@@ -14,7 +14,7 @@ interface DashboardHomeProps {
 }
 
 const StatCard: React.FC<{ title: string; value: string | number, icon: React.ReactNode, description?: string }> = ({ title, value, icon, description }) => (
-    <Card>
+    <Card className="transition-transform transform hover:scale-105">
         <CardContent className="flex items-center justify-between">
             <div>
                 <p className="text-sm font-medium text-secondary-dark">{title}</p>

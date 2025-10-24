@@ -42,6 +42,7 @@ const initialAspirations: Aspiration[] = [
     { id: 1, text: "Tolong perbaiki fasilitas toilet siswa, beberapa pintu rusak.", status: 'read', category: 'Fasilitas', timestamp: Date.now() - 86400000 * 2 },
     { id: 2, text: "Adakan lebih banyak ekstrakurikuler di bidang seni, seperti teater atau musik.", status: 'read', category: 'Kegiatan Kesiswaan', timestamp: Date.now() - 86400000 },
     { id: 3, text: "Saya berharap ada wifi gratis di area taman sekolah untuk belajar.", status: 'unread', timestamp: Date.now() },
+    { id: 4, text: "Jadwal ekstrakurikuler sering bentrok, mohon dikoordinasikan lagi.", status: 'unread', timestamp: Date.now() - 3600000 },
 ];
 
 export const useMockVotingData = () => {

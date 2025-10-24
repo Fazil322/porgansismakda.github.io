@@ -7,7 +7,7 @@ import VotingPortal from './pages/VotingPortal';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminLogin from './pages/AdminLogin';
 import { useMockVotingData } from './hooks/useMockVotingData';
-import { Candidate, NewsItem, Organization, Registration, VotingToken } from './types';
+import { Candidate, NewsItem, Organization, Registration, VotingToken, Aspiration } from './types';
 import Toast from './components/Toast';
 import { categorizeAspirations } from './services/geminiService';
 
@@ -143,6 +143,17 @@ function App() {
             }));
         }
     };
+    
+    const handleAddAspiration = (text: string) => {
+        const newAspiration: Aspiration = {
+            id: Date.now(),
+            text,
+            status: 'unread',
+            timestamp: Date.now(),
+        };
+        mockData.setAspirations(prev => [newAspiration, ...prev]);
+        addToast('Aspirasi Anda telah terkirim. Terima kasih!', 'success');
+    };
 
 
   const renderPage = () => {
@@ -154,6 +165,9 @@ function App() {
                     newsItems={mockData.newsItems}
                     onRegister={(org: Organization, data) => handleAddRegistration(data, org.name)}
                     addToast={addToast}
+                    onAddAspiration={handleAddAspiration}
+                    votingEvent={mockData.votingEvent}
+                    setCurrentPage={setCurrentPage}
                 />;
       case Page.Voting:
         return mockData.votingEvent ? (
@@ -183,6 +197,9 @@ function App() {
                     newsItems={mockData.newsItems}
                     onRegister={(org: Organization, data) => handleAddRegistration(data, org.name)}
                     addToast={addToast}
+                    onAddAspiration={handleAddAspiration}
+                    votingEvent={mockData.votingEvent}
+                    setCurrentPage={setCurrentPage}
                 />;
     }
   };
@@ -194,10 +211,10 @@ function App() {
         votingEvent={mockData.votingEvent} 
         isAdminAuthenticated={isAdminAuthenticated} 
       />
-      <main className="flex-grow container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="flex-grow">
         {renderPage()}
       </main>
-      <Footer />
+      <Footer setCurrentPage={setCurrentPage} />
        <div className="fixed top-5 right-5 z-[100] w-full max-w-sm space-y-3">
         {toasts.map(toast => (
           <Toast key={toast.id} message={toast.message} type={toast.type} onDismiss={() => removeToast(toast.id)} />
