@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import { Page } from '../App';
 import { SchoolIcon } from './icons/SchoolIcon';
 import { VotingEvent } from '../types';
@@ -10,34 +10,8 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({ setCurrentPage, votingEvent, isAdminAuthenticated }) => {
-  const [logoClickCount, setLogoClickCount] = useState(0);
-  const clickTimeout = useRef<number>();
-
-  useEffect(() => {
-    // Cleanup timer on unmount
-    return () => clearTimeout(clickTimeout.current);
-  }, []);
-
   const handleLogoClick = () => {
-    // Clear previous timeout if it exists
-    if (clickTimeout.current) {
-      clearTimeout(clickTimeout.current);
-    }
-
-    const newCount = logoClickCount + 1;
-    setLogoClickCount(newCount);
-
-    if (newCount === 2) {
-      // On 2nd click, navigate to admin and reset
-      setLogoClickCount(0);
-      setCurrentPage(Page.AdminLogin);
-    } else {
-      // For a single click, set a timeout. If it's not cleared by another click, navigate to Home.
-      clickTimeout.current = window.setTimeout(() => {
-        setCurrentPage(Page.Home);
-        setLogoClickCount(0); // Reset after action
-      }, 300);
-    }
+    setCurrentPage(Page.Home);
   };
 
 
