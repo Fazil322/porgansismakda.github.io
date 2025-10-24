@@ -7,7 +7,7 @@ import VotingPortal from './pages/VotingPortal';
 import AdminDashboard from './pages/AdminDashboard';
 import AdminLogin from './pages/AdminLogin';
 import { useMockVotingData } from './hooks/useMockVotingData';
-import { Candidate, NewsItem, Organization, Registration, VotingToken, Aspiration } from './types';
+import { Candidate, NewsItem, Organization, Registration, VotingToken, Aspiration, Document, Poll, PollOption } from './types';
 import Toast from './components/Toast';
 import { categorizeAspirations } from './services/geminiService';
 
@@ -97,6 +97,31 @@ function App() {
     }
   };
   
+  const handlePollVote = (pollId: number, optionId: number) => {
+    mockData.setPolls(prevPolls => {
+      return prevPolls.map(poll => {
+        if (poll.id === pollId) {
+          return {
+            ...poll,
+            options: poll.options.map(option =>
+              option.id === optionId ? { ...option, votes: option.votes + 1 } : option
+            ),
+          };
+        }
+        return poll;
+      });
+    });
+
+    try {
+      const votedPolls = JSON.parse(localStorage.getItem('votedPolls') || '{}');
+      votedPolls[pollId] = optionId;
+      localStorage.setItem('votedPolls', JSON.stringify(votedPolls));
+    } catch (error) {
+      console.error("Could not save poll vote to localStorage", error);
+    }
+    addToast('Pilihan Anda berhasil direkam!', 'success');
+  };
+
   const handleCategorizeAspirations = async () => {
       const unreadAspirations = mockData.aspirations.filter(a => a.status === 'unread');
       if (unreadAspirations.length === 0) {
@@ -163,9 +188,12 @@ function App() {
                     organizations={mockData.organizations} 
                     activities={mockData.activities} 
                     newsItems={mockData.newsItems}
+                    documents={mockData.documents}
+                    polls={mockData.polls}
                     onRegister={(org: Organization, data) => handleAddRegistration(data, org.name)}
                     addToast={addToast}
                     onAddAspiration={handleAddAspiration}
+                    onPollVote={handlePollVote}
                     votingEvent={mockData.votingEvent}
                     setCurrentPage={setCurrentPage}
                 />;
@@ -195,9 +223,12 @@ function App() {
                     organizations={mockData.organizations} 
                     activities={mockData.activities} 
                     newsItems={mockData.newsItems}
+                    documents={mockData.documents}
+                    polls={mockData.polls}
                     onRegister={(org: Organization, data) => handleAddRegistration(data, org.name)}
                     addToast={addToast}
                     onAddAspiration={handleAddAspiration}
+                    onPollVote={handlePollVote}
                     votingEvent={mockData.votingEvent}
                     setCurrentPage={setCurrentPage}
                 />;
@@ -205,7 +236,7 @@ function App() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-background font-sans">
+    <div className="flex flex-col min-h-screen bg-background dark:bg-dark-background font-sans text-text-secondary dark:text-dark-text-secondary">
       <Header 
         setCurrentPage={setCurrentPage} 
         votingEvent={mockData.votingEvent} 

@@ -26,7 +26,7 @@ const calculateTimeLeft = (endDate: string) => {
 };
 
 const TimeBlock: React.FC<{ value: number; label: string }> = ({ value, label }) => (
-  <div className="flex flex-col items-center justify-center bg-primary-light/50 text-white rounded-lg w-20 h-20 md:w-24 md:h-24 border border-white/20">
+  <div className="flex flex-col items-center justify-center bg-black/20 text-white rounded-lg w-20 h-20 md:w-24 md:h-24 border border-white/20 backdrop-blur-sm">
     <span className="text-3xl md:text-4xl font-bold">{String(value).padStart(2, '0')}</span>
     <span className="text-xs uppercase tracking-wider">{label}</span>
   </div>
@@ -45,7 +45,7 @@ const CountdownTimer: React.FC<CountdownTimerProps> = ({ endDate }) => {
 
   return (
     <div>
-        <p className="text-sm font-semibold uppercase tracking-widest text-secondary-dark mb-3">Voting Berakhir Dalam</p>
+        <p className="text-sm font-semibold uppercase tracking-widest text-slate-300 mb-3 text-center">Voting Berakhir Dalam</p>
         <div className="flex justify-center space-x-2 md:space-x-4">
             <TimeBlock value={timeLeft.days} label="Hari" />
             <TimeBlock value={timeLeft.hours} label="Jam" />

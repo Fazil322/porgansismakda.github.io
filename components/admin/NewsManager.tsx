@@ -14,6 +14,20 @@ interface NewsManagerProps {
 
 const emptyNewsItem: Omit<NewsItem, 'id'> = { title: '', content: '', imageUrl: '', organizationTag: 'OSIS' };
 
+const InputField: React.FC<{label: string, value: string, onChange: (v: string) => void}> = ({label, value, onChange}) => (
+    <div>
+        <label className="block text-sm font-medium text-text-secondary dark:text-slate-300">{label}</label>
+        <input type="text" value={value} onChange={e => onChange(e.target.value)} className="mt-1 block w-full px-3 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 rounded-md shadow-sm focus:outline-none focus:ring-primary dark:focus:ring-dark-primary focus:border-primary dark:focus:border-dark-primary sm:text-sm text-text-primary dark:text-dark-text-primary" />
+    </div>
+);
+
+const TextAreaField: React.FC<{label: string, value: string, onChange: (v: string) => void, rows?: number, placeholder?: string}> = ({label, value, onChange, rows = 3, placeholder}) => (
+    <div>
+        <label className="block text-sm font-medium text-text-secondary dark:text-slate-300">{label}</label>
+        <textarea value={value} onChange={e => onChange(e.target.value)} rows={rows} placeholder={placeholder} className="mt-1 block w-full px-3 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 rounded-md shadow-sm focus:outline-none focus:ring-primary dark:focus:ring-dark-primary focus:border-primary dark:focus:border-dark-primary sm:text-sm text-text-primary dark:text-dark-text-primary" />
+    </div>
+);
+
 const NewsManager: React.FC<NewsManagerProps> = ({ newsItems, addNewsItem, updateNewsItem, deleteNewsItem, addToast }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingNewsItem, setEditingNewsItem] = useState<Omit<NewsItem, 'id'> | NewsItem | null>(null);
@@ -79,14 +93,14 @@ const NewsManager: React.FC<NewsManagerProps> = ({ newsItems, addNewsItem, updat
     return (
         <div>
             <div className="flex justify-between items-center mb-6">
-                <h3 className="text-2xl font-bold text-primary">Manajemen Berita</h3>
-                <button onClick={openModalForNew} className="bg-primary text-white px-4 py-2 rounded-lg font-semibold hover:bg-primary-light transition-colors">
+                <h3 className="text-2xl font-bold text-primary dark:text-dark-primary">Manajemen Berita</h3>
+                <button onClick={openModalForNew} className="bg-primary dark:bg-dark-primary text-white px-4 py-2 rounded-lg font-semibold hover:bg-primary-light dark:hover:bg-dark-primary-light transition-colors">
                     Tambah Berita
                 </button>
             </div>
-            <div className="overflow-x-auto border border-slate-200 rounded-lg">
-                <table className="w-full text-sm text-left text-secondary-dark">
-                    <thead className="text-xs uppercase bg-slate-100">
+            <div className="overflow-x-auto border border-slate-200 dark:border-slate-700 rounded-lg">
+                <table className="w-full text-sm text-left text-text-secondary dark:text-dark-text-secondary">
+                    <thead className="text-xs uppercase bg-slate-100 dark:bg-slate-800">
                         <tr>
                             <th scope="col" className="px-6 py-3">Gambar</th>
                             <th scope="col" className="px-6 py-3">Judul</th>
@@ -96,13 +110,13 @@ const NewsManager: React.FC<NewsManagerProps> = ({ newsItems, addNewsItem, updat
                     </thead>
                     <tbody>
                         {newsItems.map(item => (
-                            <tr key={item.id} className="bg-surface border-b border-slate-200 hover:bg-slate-50">
+                            <tr key={item.id} className="bg-surface dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50">
                                 <td className="px-6 py-4"><img src={item.imageUrl} alt={item.title} className="h-10 w-16 object-cover rounded"/></td>
-                                <td className="px-6 py-4 font-medium text-primary">{item.title}</td>
-                                <td className="px-6 py-4"><span className="text-xs bg-accent-light text-accent-hover font-semibold px-2 py-1 rounded-full">{item.organizationTag}</span></td>
+                                <td className="px-6 py-4 font-medium text-primary dark:text-dark-primary">{item.title}</td>
+                                <td className="px-6 py-4"><span className="text-xs bg-accent-light dark:bg-teal-900/50 text-accent-hover dark:text-teal-400 font-semibold px-2 py-1 rounded-full">{item.organizationTag}</span></td>
                                 <td className="px-6 py-4 text-right space-x-4">
-                                    <button onClick={() => openModalForEdit(item)} className="font-medium text-accent hover:text-accent-hover transition-colors">Edit</button>
-                                    <button onClick={() => setDeletingNewsItem(item)} className="font-medium text-red-600 hover:text-red-700 transition-colors">Hapus</button>
+                                    <button onClick={() => openModalForEdit(item)} className="font-medium text-accent hover:text-accent-hover dark:text-cyan-400 dark:hover:text-cyan-300 transition-colors">Edit</button>
+                                    <button onClick={() => setDeletingNewsItem(item)} className="font-medium text-red-600 hover:text-red-700 dark:text-red-500 dark:hover:text-red-400 transition-colors">Hapus</button>
                                 </td>
                             </tr>
                         ))}
@@ -118,8 +132,8 @@ const NewsManager: React.FC<NewsManagerProps> = ({ newsItems, addNewsItem, updat
                     confirmText="Simpan"
                 >
                     <div className="space-y-4">
-                        <div className="p-4 bg-slate-50 rounded-lg border border-slate-200">
-                            <h4 className="text-sm font-semibold text-primary mb-2">Buat Konten dengan AI ✨</h4>
+                        <div className="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-lg border border-slate-200 dark:border-slate-600">
+                            <h4 className="text-sm font-semibold text-primary dark:text-dark-primary mb-2">Buat Konten dengan AI ✨</h4>
                             <TextAreaField label="Masukkan poin-poin atau ide utama berita:" value={aiPrompt} onChange={setAiPrompt} rows={2} placeholder="Contoh: Rapat OSIS awal tahun, bahas proker, dihadiri perwakilan kelas..." />
                             <button onClick={handleGenerateArticle} disabled={isGenerating} className="mt-2 w-full text-sm bg-indigo-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-indigo-700 disabled:bg-slate-400 transition-colors flex items-center justify-center">
                                {isGenerating && <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>}
@@ -152,19 +166,5 @@ const NewsManager: React.FC<NewsManagerProps> = ({ newsItems, addNewsItem, updat
         </div>
     );
 };
-
-const InputField: React.FC<{label: string, value: string, onChange: (v: string) => void}> = ({label, value, onChange}) => (
-    <div>
-        <label className="block text-sm font-medium text-secondary-dark">{label}</label>
-        <input type="text" value={value} onChange={e => onChange(e.target.value)} className="mt-1 block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-accent focus:border-accent sm:text-sm" />
-    </div>
-);
-
-const TextAreaField: React.FC<{label: string, value: string, onChange: (v: string) => void, rows?: number, placeholder?: string}> = ({label, value, onChange, rows = 3, placeholder}) => (
-    <div>
-        <label className="block text-sm font-medium text-secondary-dark">{label}</label>
-        <textarea value={value} onChange={e => onChange(e.target.value)} rows={rows} placeholder={placeholder} className="mt-1 block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-accent focus:border-accent sm:text-sm" />
-    </div>
-);
 
 export default NewsManager;

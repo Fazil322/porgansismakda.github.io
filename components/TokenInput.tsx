@@ -55,7 +55,7 @@ const TokenInput: React.FC<TokenInputProps> = ({ value, onChange, disabled }) =>
           onChange={(e) => handleChange(e, index)}
           onKeyDown={(e) => handleKeyDown(e, index)}
           disabled={disabled}
-          className="w-12 h-14 md:w-14 md:h-16 text-center text-2xl font-mono font-bold border-2 border-slate-300 rounded-lg focus:ring-2 focus:ring-accent focus:border-accent transition disabled:bg-slate-100"
+          className="w-12 h-14 md:w-14 md:h-16 text-center text-2xl font-mono font-bold border-2 bg-surface dark:bg-dark-surface text-text-primary dark:text-dark-text-primary border-slate-300 dark:border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-dark-primary focus:border-primary dark:focus:border-dark-primary transition disabled:bg-slate-100 dark:disabled:bg-slate-700 disabled:cursor-not-allowed"
         />
       ))}
     </div>

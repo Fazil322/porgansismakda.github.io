@@ -1,4 +1,5 @@
 
+
 export interface Candidate {
   id: number;
   name: string;
@@ -69,4 +70,35 @@ export interface Registration {
     reason: string;
     status: 'pending' | 'approved' | 'rejected';
     submittedAt: number;
+}
+
+export interface Document {
+    id: number;
+    title: string;
+    date: string;
+    content: string;
+    organization: string;
+}
+
+export interface PollOption {
+  id: number;
+  text: string;
+  votes: number;
+}
+
+export interface Poll {
+  id: number;
+  question: string;
+  options: PollOption[];
+  isActive: boolean;
+  createdAt: number;
+}
+
+// FIX: Add missing FinancialRecord interface.
+export interface FinancialRecord {
+  id: number;
+  date: string;
+  description: string;
+  type: 'income' | 'expense';
+  amount: number;
 }

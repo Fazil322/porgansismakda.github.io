@@ -10,12 +10,12 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-primary text-slate-300 mt-20 border-t-4 border-accent">
+    <footer className="bg-slate-800 dark:bg-dark-background text-slate-300 mt-20 border-t-4 border-primary dark:border-dark-primary">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="md:col-span-2">
              <div className="flex items-center space-x-3 mb-4">
-              <SchoolIcon className="h-10 w-10 text-accent" />
+              <SchoolIcon className="h-10 w-10 text-primary dark:text-dark-primary" />
               <div>
                 <h1 className="text-xl font-bold text-white">Portal Organisasi</h1>
                 <p className="text-sm text-slate-400">SMK LPPMRI 2 KEDUNGREJA</p>
@@ -28,8 +28,8 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => {
           <div>
             <h3 className="font-bold text-white tracking-wider uppercase">Tautan Cepat</h3>
             <ul className="mt-4 space-y-2">
-              <li><a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage(Page.Home); }} className="hover:text-accent transition-colors">Beranda</a></li>
-              <li><a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage(Page.Voting); }} className="hover:text-accent transition-colors">E-Voting</a></li>
+              <li><a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage(Page.Home); }} className="text-slate-300 hover:text-primary dark:hover:text-dark-primary transition-colors">Beranda</a></li>
+              <li><a href="#" onClick={(e) => { e.preventDefault(); setCurrentPage(Page.Voting); }} className="text-slate-300 hover:text-primary dark:hover:text-dark-primary transition-colors">E-Voting</a></li>
             </ul>
           </div>
           <div>
@@ -37,12 +37,12 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => {
             <ul className="mt-4 space-y-2 text-slate-400">
               <li>Jl. Tambaksari No. 2, Kedungreja</li>
               <li>Cilacap, Jawa Tengah</li>
-              <li className="pt-2"><a href="mailto:info@smk.sch.id" className="hover:text-accent transition-colors">info@smk.sch.id</a></li>
+              <li className="pt-2"><a href="mailto:info@smk.sch.id" className="text-slate-300 hover:text-primary dark:hover:text-dark-primary transition-colors">info@smk.sch.id</a></li>
             </ul>
           </div>
         </div>
       </div>
-      <div className="bg-primary-dark">
+      <div className="bg-slate-900 dark:bg-black/20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center text-sm text-slate-500">
             <p>&copy; {currentYear} SMK LPPMRI 2 KEDUNGREJA. Seluruh hak cipta dilindungi.</p>
         </div>

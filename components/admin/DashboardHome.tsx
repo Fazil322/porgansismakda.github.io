@@ -14,14 +14,14 @@ interface DashboardHomeProps {
 }
 
 const StatCard: React.FC<{ title: string; value: string | number, icon: React.ReactNode, description?: string }> = ({ title, value, icon, description }) => (
-    <Card className="transition-transform transform hover:scale-105">
-        <CardContent className="flex items-center justify-between">
+    <Card className="transition-transform transform hover:scale-105 shadow-md hover:shadow-lg">
+        <CardContent className="flex items-center justify-between p-4">
             <div>
-                <p className="text-sm font-medium text-secondary-dark">{title}</p>
-                <p className="text-3xl font-bold text-primary">{value}</p>
-                {description && <p className="text-xs text-secondary-dark">{description}</p>}
+                <p className="text-sm font-medium text-text-secondary dark:text-dark-text-secondary">{title}</p>
+                <p className="text-3xl font-bold text-text-primary dark:text-dark-text-primary">{value}</p>
+                {description && <p className="text-xs text-text-secondary dark:text-dark-text-secondary">{description}</p>}
             </div>
-            <div className="bg-accent-light p-4 rounded-full text-accent">
+            <div className="bg-primary/10 dark:bg-dark-primary/20 p-4 rounded-full text-primary dark:text-dark-primary">
                 {icon}
             </div>
         </CardContent>
@@ -38,8 +38,8 @@ const DashboardHome: React.FC<DashboardHomeProps> = ({ voteHistory, candidates, 
     return (
         <div className="space-y-8">
             <div>
-                <h2 className="text-3xl font-bold text-primary">Dashboard Utama</h2>
-                <p className="text-secondary-dark mt-1">Selamat datang kembali! Berikut adalah ringkasan aktivitas portal.</p>
+                <h2 className="text-3xl font-bold text-text-primary dark:text-dark-text-primary">Dashboard Utama</h2>
+                <p className="text-text-secondary dark:text-dark-text-secondary mt-1">Selamat datang kembali! Berikut adalah ringkasan aktivitas portal.</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -69,7 +69,7 @@ const DashboardHome: React.FC<DashboardHomeProps> = ({ voteHistory, candidates, 
             </div>
             
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <Card className="lg:col-span-2">
+                <Card className="lg:col-span-2 shadow-md">
                     <CardHeader>
                         <CardTitle>Perolehan Suara Kandidat</CardTitle>
                     </CardHeader>
@@ -77,7 +77,7 @@ const DashboardHome: React.FC<DashboardHomeProps> = ({ voteHistory, candidates, 
                         <ResultChart data={candidates} />
                     </CardContent>
                 </Card>
-                 <Card>
+                 <Card className="shadow-md">
                     <CardHeader>
                         <CardTitle>Aktivitas Terbaru</CardTitle>
                     </CardHeader>
@@ -92,7 +92,7 @@ const DashboardHome: React.FC<DashboardHomeProps> = ({ voteHistory, candidates, 
                 </Card>
             </div>
             
-            <Card>
+            <Card className="shadow-md">
                 <CardHeader>
                     <CardTitle>Tren Suara Masuk (per Jam)</CardTitle>
                 </CardHeader>

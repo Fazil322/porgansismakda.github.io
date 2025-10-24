@@ -21,8 +21,8 @@ const generateNewTokens = (count: number, existingTokens: VotingToken[]): Voting
 
 const statusBadge = (status: VotingToken['status']) => {
     switch (status) {
-        case 'active': return 'bg-green-100 text-green-800';
-        case 'used': return 'bg-slate-200 text-slate-600';
+        case 'active': return 'bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-300';
+        case 'used': return 'bg-slate-200 text-slate-600 dark:bg-slate-700 dark:text-slate-300';
     }
 };
 
@@ -30,10 +30,10 @@ const StatCard: React.FC<{ title: string; value: string | number, icon: React.Re
     <Card>
         <CardContent className="flex items-center justify-between">
             <div>
-                <p className="text-sm font-medium text-secondary-dark">{title}</p>
-                <p className="text-2xl font-bold text-primary">{value}</p>
+                <p className="text-sm font-medium text-text-secondary dark:text-dark-text-secondary">{title}</p>
+                <p className="text-2xl font-bold text-text-primary dark:text-dark-text-primary">{value}</p>
             </div>
-            <div className="bg-accent-light p-3 rounded-full text-accent">
+            <div className="bg-accent-light dark:bg-teal-900/50 p-3 rounded-full text-accent dark:text-teal-400">
                 {icon}
             </div>
         </CardContent>
@@ -107,7 +107,7 @@ const TokenManager: React.FC<{
     return (
         <div>
             <div className="flex justify-between items-center mb-6">
-                <h3 className="text-2xl font-bold text-primary">Manajemen Token Voting</h3>
+                <h3 className="text-2xl font-bold text-primary dark:text-dark-primary">Manajemen Token Voting</h3>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
@@ -122,15 +122,15 @@ const TokenManager: React.FC<{
                         <CardTitle>Daftar Token</CardTitle>
                         <div className="flex items-center gap-2 flex-wrap">
                             <button onClick={handleExport} className="px-4 py-2 text-sm font-semibold bg-slate-600 text-white rounded-lg hover:bg-slate-700 transition-colors">Ekspor CSV</button>
-                            <button onClick={() => setShowDeleteModal(true)} disabled={active === 0} className="px-4 py-2 text-sm font-semibold bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:bg-slate-400 transition-colors">Hapus Tdk Terpakai</button>
+                            <button onClick={() => setShowDeleteModal(true)} disabled={active === 0} className="px-4 py-2 text-sm font-semibold bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:bg-slate-400 dark:disabled:bg-slate-600 transition-colors">Hapus Tdk Terpakai</button>
                             <button onClick={() => setShowGenerateModal(true)} className="px-4 py-2 text-sm font-semibold bg-primary text-white rounded-lg hover:bg-primary-light transition-colors">Buat Token Baru</button>
                         </div>
                     </div>
                 </CardHeader>
                 <CardContent>
                     <div className="overflow-x-auto">
-                        <table className="w-full text-sm text-left text-secondary-dark">
-                            <thead className="text-xs uppercase bg-slate-100">
+                        <table className="w-full text-sm text-left text-text-secondary dark:text-dark-text-secondary">
+                            <thead className="text-xs uppercase bg-slate-100 dark:bg-slate-800">
                                 <tr>
                                     <th scope="col" className="px-6 py-3">Token ID</th>
                                     <th scope="col" className="px-6 py-3">Status</th>
@@ -139,8 +139,8 @@ const TokenManager: React.FC<{
                             </thead>
                             <tbody>
                                 {paginatedTokens.map(token => (
-                                    <tr key={token.id} className="bg-surface border-b border-slate-200 hover:bg-slate-50">
-                                        <td className="px-6 py-4 font-mono font-bold text-primary">{token.id}</td>
+                                    <tr key={token.id} className="bg-surface dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700/50">
+                                        <td className="px-6 py-4 font-mono font-bold text-primary dark:text-dark-primary">{token.id}</td>
                                         <td className="px-6 py-4">
                                             <span className={`px-2 py-1 text-xs font-semibold rounded-full ${statusBadge(token.status)}`}>{token.status}</span>
                                         </td>
@@ -149,14 +149,14 @@ const TokenManager: React.FC<{
                                 ))}
                             </tbody>
                         </table>
-                        {tokens.length === 0 && <p className="text-center p-8 text-secondary">Belum ada token yang dibuat.</p>}
+                        {tokens.length === 0 && <p className="text-center p-8 text-text-secondary dark:text-dark-text-secondary">Belum ada token yang dibuat.</p>}
                     </div>
                     {totalPages > 1 && (
                         <div className="flex justify-between items-center pt-4">
-                            <span className="text-sm text-secondary-dark">Halaman {currentPage} dari {totalPages}</span>
+                            <span className="text-sm text-text-secondary dark:text-dark-text-secondary">Halaman {currentPage} dari {totalPages}</span>
                             <div className="space-x-2">
-                                <button onClick={() => setCurrentPage(p => Math.max(1, p - 1))} disabled={currentPage === 1} className="px-3 py-1 border rounded-md disabled:opacity-50">Sebelumnya</button>
-                                <button onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))} disabled={currentPage === totalPages} className="px-3 py-1 border rounded-md disabled:opacity-50">Berikutnya</button>
+                                <button onClick={() => setCurrentPage(p => Math.max(1, p - 1))} disabled={currentPage === 1} className="px-3 py-1 border border-slate-300 dark:border-slate-600 rounded-md disabled:opacity-50 disabled:cursor-not-allowed">Sebelumnya</button>
+                                <button onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))} disabled={currentPage === totalPages} className="px-3 py-1 border border-slate-300 dark:border-slate-600 rounded-md disabled:opacity-50 disabled:cursor-not-allowed">Berikutnya</button>
                             </div>
                         </div>
                     )}
@@ -165,7 +165,7 @@ const TokenManager: React.FC<{
 
             {showGenerateModal && (
                 <Modal isOpen={showGenerateModal} onClose={() => setShowGenerateModal(false)} onConfirm={handleGenerate} title="Buat Token Baru" confirmText="Buat">
-                    <label htmlFor="token-count" className="block text-sm font-medium text-secondary-dark">Jumlah token yang akan dibuat:</label>
+                    <label htmlFor="token-count" className="block text-sm font-medium text-text-secondary dark:text-slate-300">Jumlah token yang akan dibuat:</label>
                     <input
                         id="token-count"
                         type="number"
@@ -173,9 +173,9 @@ const TokenManager: React.FC<{
                         onChange={e => setGenerateCount(e.target.value)}
                         min="1"
                         max="5000"
-                        className="mt-1 block w-full px-3 py-2 border border-slate-300 rounded-md shadow-sm focus:outline-none focus:ring-accent focus:border-accent sm:text-sm"
+                        className="mt-1 block w-full px-3 py-2 border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-700 rounded-md shadow-sm focus:outline-none focus:ring-primary dark:focus:ring-dark-primary focus:border-primary dark:focus:border-dark-primary sm:text-sm"
                     />
-                    <p className="text-xs text-secondary-dark mt-2">Maksimal 5000 token per pembuatan.</p>
+                    <p className="text-xs text-text-secondary dark:text-slate-400 mt-2">Maksimal 5000 token per pembuatan.</p>
                 </Modal>
             )}
 

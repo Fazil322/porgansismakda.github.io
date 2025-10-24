@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { VotingEvent, Candidate, VotingToken, Organization, Activity, NewsItem, Aspiration, Registration, VoteRecord } from '../types';
+import { VotingEvent, Candidate, VotingToken, Organization, Activity, NewsItem, Aspiration, Registration, VoteRecord, Document, Poll } from '../types';
 
 const generateTokens = (count: number): VotingToken[] => {
   const tokens: VotingToken[] = [];
@@ -45,6 +45,37 @@ const initialAspirations: Aspiration[] = [
     { id: 4, text: "Jadwal ekstrakurikuler sering bentrok, mohon dikoordinasikan lagi.", status: 'unread', timestamp: Date.now() - 3600000 },
 ];
 
+const initialDocuments: Document[] = [
+    { id: 1, title: 'Notulensi Rapat Program Kerja OSIS 2024', date: '2024-07-10', organization: 'OSIS', content: 'Rapat membahas rencana program kerja tahunan, termasuk Peringatan HUT RI, LDKS, dan Class Meeting. Anggaran awal disetujui dan panitia untuk setiap acara mulai dibentuk.' },
+    { id: 2, title: 'Proposal Kegiatan Perkemahan Pramuka', date: '2024-08-05', organization: 'Pramuka', content: 'Proposal ini diajukan untuk kegiatan perkemahan dalam rangka memperingati Hari Pramuka. Rincian jadwal, lokasi, dan anggaran terlampir.' },
+];
+
+const initialPolls: Poll[] = [
+    {
+        id: 1,
+        question: "Apa destinasi studi tur yang paling kamu inginkan tahun ini?",
+        options: [
+            { id: 1, text: "Yogyakarta (Candi & Malioboro)", votes: 45 },
+            { id: 2, text: "Bandung (Lembang & Kawah Putih)", votes: 72 },
+            { id: 3, text: "Malang (Jatim Park & Bromo)", votes: 61 },
+        ],
+        isActive: true,
+        createdAt: Date.now() - 86400000 * 5,
+    },
+    {
+        id: 2,
+        question: "Jenis ekskul baru apa yang perlu ditambahkan?",
+        options: [
+            { id: 1, text: "E-Sport", votes: 112 },
+            { id: 2, text: "Sinematografi", votes: 88 },
+            { id: 3, text: "Klub Robotik", votes: 54 },
+            { id: 4, text: "Jurnalistik", votes: 35 },
+        ],
+        isActive: false,
+        createdAt: Date.now() - 86400000 * 10,
+    }
+];
+
 export const useMockVotingData = () => {
     const [votingEvent, setVotingEvent] = useState<VotingEvent | null>({
         title: 'Pemilihan Ketua OSIS 2024/2025',
@@ -61,6 +92,8 @@ export const useMockVotingData = () => {
     const [newsItems, setNewsItems] = useState<NewsItem[]>(initialNews);
     const [aspirations, setAspirations] = useState<Aspiration[]>(initialAspirations);
     const [registrations, setRegistrations] = useState<Registration[]>([]);
+    const [documents, setDocuments] = useState<Document[]>(initialDocuments);
+    const [polls, setPolls] = useState<Poll[]>(initialPolls);
     
     const [voteHistory, setVoteHistory] = useState<VoteRecord[]>([
         { id: 'v1', candidateId: 2, timestamp: Date.now() - 86400000 * 3 },
@@ -88,5 +121,9 @@ export const useMockVotingData = () => {
         setVoteHistory,
         registrations,
         setRegistrations,
+        documents,
+        setDocuments,
+        polls,
+        setPolls,
     };
 };

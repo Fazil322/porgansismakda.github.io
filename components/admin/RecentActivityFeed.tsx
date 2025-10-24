@@ -11,10 +11,10 @@ interface RecentActivityFeedProps {
 
 const ActivityItem: React.FC<{ icon: React.ReactNode; children: React.ReactNode; time: string }> = ({ icon, children, time }) => (
     <li className="flex items-start space-x-4 py-3">
-        <div className="flex-shrink-0 bg-slate-100 rounded-full h-10 w-10 flex items-center justify-center text-slate-500">{icon}</div>
+        <div className="flex-shrink-0 bg-slate-100 dark:bg-slate-700 rounded-full h-10 w-10 flex items-center justify-center text-slate-500 dark:text-slate-300">{icon}</div>
         <div className="flex-1">
-            <div className="text-sm text-secondary-dark">{children}</div>
-            <div className="text-xs text-slate-400 mt-0.5">{time}</div>
+            <div className="text-sm text-text-secondary dark:text-dark-text-secondary">{children}</div>
+            <div className="text-xs text-slate-400 dark:text-slate-500 mt-0.5">{time}</div>
         </div>
     </li>
 );
@@ -45,9 +45,9 @@ const RecentActivityFeed: React.FC<RecentActivityFeedProps> = ({ voteHistory, re
 
     return (
         <div>
-            <h3 className="text-lg font-bold text-primary mb-4">Aktivitas Terbaru</h3>
+            <h3 className="text-lg font-bold text-primary dark:text-dark-primary mb-4">Aktivitas Terbaru</h3>
             {combinedActivities.length > 0 ? (
-                <ul className="divide-y divide-slate-200">
+                <ul className="divide-y divide-slate-200 dark:divide-slate-700">
                     {combinedActivities.map((activity, index) => {
                          switch (activity.type) {
                             case 'vote':
@@ -62,7 +62,7 @@ const RecentActivityFeed: React.FC<RecentActivityFeedProps> = ({ voteHistory, re
                     })}
                 </ul>
             ) : (
-                <p className="text-sm text-secondary">Tidak ada aktivitas terbaru.</p>
+                <p className="text-sm text-text-secondary dark:text-dark-text-secondary">Tidak ada aktivitas terbaru.</p>
             )}
         </div>
     );
