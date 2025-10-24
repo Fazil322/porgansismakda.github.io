@@ -14,15 +14,20 @@ const Header: React.FC<HeaderProps> = ({ setCurrentPage, votingEvent, isAdminAut
     setCurrentPage(Page.Home);
   };
 
+  const handleAdminAccessClick = () => {
+    setCurrentPage(Page.AdminLogin);
+  };
 
   return (
     <header className="bg-surface/80 backdrop-blur-lg shadow-sm sticky top-0 z-50 border-b border-slate-200/60">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
-        <div className="flex items-center space-x-3 cursor-pointer" onClick={handleLogoClick}>
-          <SchoolIcon className="h-10 w-10 text-primary" />
+        <div className="flex items-center space-x-3">
+          <div className="cursor-pointer" onClick={handleLogoClick}>
+            <SchoolIcon className="h-10 w-10 text-primary" />
+          </div>
           <div>
-            <h1 className="text-lg font-bold text-primary">Portal Organisasi</h1>
-            <p className="text-xs text-secondary">SMK LPPMRI 2 KEDUNGREJA</p>
+            <h1 className="text-lg font-bold text-primary cursor-pointer" onClick={handleLogoClick}>Portal Organisasi</h1>
+            <p className="text-xs text-secondary cursor-pointer" onClick={handleAdminAccessClick}>SMK LPPMRI 2 KEDUNGREJA</p>
           </div>
         </div>
         <nav className="hidden md:flex items-center space-x-8">

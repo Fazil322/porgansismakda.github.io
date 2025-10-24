@@ -9,11 +9,6 @@ interface FooterProps {
 const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => {
   const currentYear = new Date().getFullYear();
 
-  const handleAdminAccessClick = (e: React.MouseEvent) => {
-      e.preventDefault();
-      setCurrentPage(Page.AdminLogin);
-  };
-
   return (
     <footer className="bg-primary text-slate-300 mt-20 border-t-4 border-accent">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -49,7 +44,7 @@ const Footer: React.FC<FooterProps> = ({ setCurrentPage }) => {
       </div>
       <div className="bg-primary-dark">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 text-center text-sm text-slate-500">
-            <p onClick={handleAdminAccessClick} className="cursor-pointer">&copy; {currentYear} SMK LPPMRI 2 KEDUNGREJA. Seluruh hak cipta dilindungi.</p>
+            <p>&copy; {currentYear} SMK LPPMRI 2 KEDUNGREJA. Seluruh hak cipta dilindungi.</p>
         </div>
       </div>
     </footer>
